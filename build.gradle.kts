@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.scientificcalculator"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.scientificcalculator"
@@ -75,6 +75,10 @@ dependencies {
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.compose) // Replace with the latest version
     implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.androidx.constraintlayout.compose)
+    implementation("net.objecthunter:exp4j:0.4.8") // Replace with the latest version
+
 }
 
 
