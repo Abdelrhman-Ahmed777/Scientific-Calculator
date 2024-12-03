@@ -1,4 +1,4 @@
-package com.example.scientificcalculator.presention.ui
+package com.example.scientificcalculator.presention.ui.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

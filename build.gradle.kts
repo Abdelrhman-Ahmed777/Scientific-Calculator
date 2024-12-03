@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.example.scientificcalculator"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -29,19 +29,25 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"  // Add this line with the appropriate version
     }
 }
 
 dependencies {
 
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -50,6 +56,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.generativeai)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,7 +85,7 @@ dependencies {
 
     implementation(libs.androidx.constraintlayout.compose)
     implementation("net.objecthunter:exp4j:0.4.8") // Replace with the latest version
-
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
 }
 
 

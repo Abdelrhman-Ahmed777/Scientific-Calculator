@@ -1,19 +1,27 @@
 package com.example.scientificcalculator.presention.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.example.scientificcalculator.presention.ui.ai.MainAiChat
+import com.example.scientificcalculator.presention.ui.home.MainCalculatorScreen
 
 @Composable
+@RequiresApi(Build.VERSION_CODES.O)
 fun NestedNavgationGraph(navController: NavHostController) {
     NavHost(
         navController = navController ,
-        startDestination = Screens.MainScreensGraph.route
+        startDestination = Screens.CalculatorScreen.route
     ) {
-        home(navController = navController)
-        aiAssistant(navController = navController)
-        history(navController = navController)
-        settings(navController = navController)
+        composable(route = Screens.CalculatorScreen.route) {
+            MainCalculatorScreen(navController)
+        }
+        composable(route = Screens.AiAssistantScreen.route) {
+               MainAiChat(navController = navController)
 
+        }
     }
 }

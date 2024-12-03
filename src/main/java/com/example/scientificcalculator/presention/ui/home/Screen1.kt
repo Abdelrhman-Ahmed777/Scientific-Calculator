@@ -1,4 +1,4 @@
-package com.example.scientificcalculator.presention.ui
+package com.example.scientificcalculator.presention.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -68,7 +68,7 @@ fun NumberScreen(
                     fontSize = 20.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
             Button(
                 onClick = { text.value += "%" } ,
@@ -85,7 +85,7 @@ fun NumberScreen(
                     fontSize = 20.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
 
             Button(
@@ -104,7 +104,7 @@ fun NumberScreen(
 
                     )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
             Button(
                 onClick = { text.value += "\u00F7" } ,
                 modifier = Modifier
@@ -158,7 +158,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
             Button(
                 onClick = { text.value += "8" } ,
@@ -175,7 +175,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
 
             Button(
@@ -193,7 +193,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
             Button(
                 onClick = { text.value += "X" } ,
                 modifier = Modifier
@@ -239,7 +239,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
             Button(
                 onClick = { text.value += "5" } ,
@@ -256,7 +256,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
             Button(
                 onClick = { text.value += "6" } ,
@@ -273,7 +273,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
             Button(
                 onClick = { text.value += "+" } ,
                 modifier = Modifier
@@ -318,7 +318,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
             Button(
                 onClick = { text.value += "2" } ,
@@ -335,7 +335,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
             Button(
                 onClick = { text.value += "3" } ,
@@ -352,7 +352,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
             Button(
                 onClick = { text.value += "-" } ,
                 modifier = Modifier
@@ -397,7 +397,7 @@ fun NumberScreen(
                     fontSize = 20.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
             Button(
                 onClick = { text.value += "0" } ,
@@ -414,7 +414,7 @@ fun NumberScreen(
                     fontSize = 20.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
 
 
             Button(
@@ -432,7 +432,7 @@ fun NumberScreen(
                     fontSize = 32.sp ,
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(24.dp))
             Button(
                 onClick = {
                     onResult(text.value)

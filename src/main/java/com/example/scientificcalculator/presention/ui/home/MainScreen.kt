@@ -1,4 +1,4 @@
-package com.example.scientificcalculator.presention.ui
+package com.example.scientificcalculator.presention.ui.home
 
 import android.util.Log
 import androidx.compose.foundation.clickable
@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -109,7 +110,6 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                         color = darkBlue ,
                         modifier = Modifier
                             .weight(1f)
-                            .fillMaxWidth()
                             .padding(16.dp)
                             .verticalScroll(rememberScrollState())
                             .align(Alignment.Start)
@@ -121,9 +121,10 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                         fontSize = 64.sp ,
                         color = Orange80 ,
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .wrapContentSize()
                             .padding(16.dp)
                             .horizontalScroll(rememberScrollState())
+                            .align(Alignment.End)
                     )
                 }
 
@@ -134,10 +135,9 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                         .height(600.dp)
                         .padding(top = 64.dp)
                         .constrainAs(keyboard) {
-                            bottom.linkTo(parent.bottom)
+                            bottom.linkTo(parent.bottom, margin = 32.dp)
                             start.linkTo(parent.start)
                             end.linkTo(parent.end)
-                            top.linkTo(resultRef.bottom)
                         }
                 ) { page ->
                     when (page) {

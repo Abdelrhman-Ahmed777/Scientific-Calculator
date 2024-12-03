@@ -1,4 +1,4 @@
-package com.example.scientificcalculator.presention.ui
+package com.example.scientificcalculator.presention.ui.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -34,6 +34,7 @@ import androidx.navigation.NavHostController
 import com.example.scientificcalculator.R.drawable.camera_ic
 import com.example.scientificcalculator.R.drawable.history_ic
 import com.example.scientificcalculator.R.drawable.robot_2_ic
+import com.example.scientificcalculator.presention.navigation.Screens
 import com.example.scientificcalculator.ui.theme.lightBlue
 import com.example.scientificcalculator.ui.theme.midPurple
 import com.example.scientificcalculator.ui.theme.white
@@ -48,78 +49,78 @@ fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
             .fillMaxHeight()
             .width(300.dp)
             .background(lightBlue)
-    ) {   Column(
-        horizontalAlignment = Alignment.Start ,
-        verticalArrangement = Arrangement.Center ,
-        modifier = Modifier
-            .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
-            .padding(top=300.dp )
-            .fillMaxHeight()
-            .width(300.dp)
-            .background(white)
     ) {
-
-
-
-
-        MenuItemButton(
-            "Home" ,
-            Icons.Default.Home ,
-            Color.Cyan
+        Column(
+            horizontalAlignment = Alignment.Start ,
+            verticalArrangement = Arrangement.Center ,
+            modifier = Modifier
+                .clip(RoundedCornerShape(topStart = 20.dp , topEnd = 20.dp))
+                .padding(top = 300.dp)
+                .fillMaxHeight()
+                .width(300.dp)
+                .background(white)
         ) {
-            scope.launch {
-                drawerState.close()
 
+
+            MenuItemButton(
+                "Home" ,
+                Icons.Default.Home ,
+                Color.Cyan
+            ) {
+                scope.launch {
+                    drawerState.close()
+
+                }
+            }
+            Spacer(Modifier.height(16.dp))
+            MenuItemButton(
+                "AI Assistant" ,
+                ImageVector.vectorResource(robot_2_ic) ,
+                Color.Red
+            ) {
+                scope.launch {
+                    drawerState.close()
+                    navController.navigate(Screens.AiAssistantScreen.route)
+                }
+            }
+            Spacer(Modifier.height(16.dp))
+
+            MenuItemButton(
+                "Camera" ,
+                ImageVector.vectorResource(camera_ic) ,
+                midPurple
+            ) {
+                scope.launch {
+                    drawerState.close()
+
+                }
+            }
+            Spacer(Modifier.height(16.dp))
+
+            MenuItemButton(
+                "History" ,
+                ImageVector.vectorResource(history_ic) ,
+                Color.Green
+            ) {
+                scope.launch {
+                    drawerState.close()
+
+                }
+            }
+            Spacer(Modifier.height(16.dp))
+
+            MenuItemButton(
+                "Settings" ,
+                Icons.Default.Settings ,
+                Color.Gray
+            ) {
+                scope.launch {
+                    drawerState.close()
+
+                }
             }
         }
-        Spacer(Modifier.height(16.dp))
-        MenuItemButton(
-            "AI Assistant" ,
-            ImageVector.vectorResource(robot_2_ic) ,
-            Color.Red
-        ) {
-            scope.launch {
-                drawerState.close()
-
-            }
-        }
-        Spacer(Modifier.height(16.dp))
-
-        MenuItemButton(
-            "Camera" ,
-            ImageVector.vectorResource(camera_ic) ,
-            midPurple
-        ) {
-            scope.launch {
-                drawerState.close()
-
-            }
-        }
-        Spacer(Modifier.height(16.dp))
-
-        MenuItemButton(
-            "History" ,
-            ImageVector.vectorResource(history_ic) ,
-            Color.Green
-        ) {
-            scope.launch {
-                drawerState.close()
-
-            }
-        }
-        Spacer(Modifier.height(16.dp))
-
-        MenuItemButton(
-            "Settings" ,
-            Icons.Default.Settings ,
-            Color.Gray
-        ) {
-            scope.launch {
-                drawerState.close()
-
-            }
-        }
-    }  }
+    }
 
 
 }
