@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -59,7 +60,7 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
     )
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    var problem = remember { mutableStateOf("") }
+    val problem = remember { mutableStateOf("") }
     var result by remember { mutableStateOf("") }
     ModalNavigationDrawer(
         drawerState = drawerState ,
@@ -96,7 +97,7 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                     horizontalAlignment = Alignment.CenterHorizontally ,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(300.dp)
                         .constrainAs(resultRef) {
                             top.linkTo(parent.top)
                             start.linkTo(parent.start)
@@ -109,6 +110,7 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                         fontFamily = digital ,
                         color = darkBlue ,
                         modifier = Modifier
+                            .wrapContentSize()
                             .weight(1f)
                             .padding(16.dp)
                             .verticalScroll(rememberScrollState())
@@ -121,10 +123,10 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                         fontSize = 64.sp ,
                         color = Orange80 ,
                         modifier = Modifier
-                            .wrapContentSize()
                             .padding(16.dp)
                             .horizontalScroll(rememberScrollState())
                             .align(Alignment.End)
+                            .wrapContentSize()
                     )
                 }
 
@@ -132,7 +134,7 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                     state = pagerState ,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(600.dp)
+                        .fillMaxHeight(0.6f)
                         .padding(top = 64.dp)
                         .constrainAs(keyboard) {
                             bottom.linkTo(parent.bottom, margin = 32.dp)

@@ -35,6 +35,8 @@ import com.example.scientificcalculator.R.drawable.camera_ic
 import com.example.scientificcalculator.R.drawable.history_ic
 import com.example.scientificcalculator.R.drawable.robot_2_ic
 import com.example.scientificcalculator.presention.navigation.Screens
+import com.example.scientificcalculator.ui.theme.darkBlue
+import com.example.scientificcalculator.ui.theme.darkGreen
 import com.example.scientificcalculator.ui.theme.lightBlue
 import com.example.scientificcalculator.ui.theme.midPurple
 import com.example.scientificcalculator.ui.theme.white
@@ -50,11 +52,15 @@ fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
             .width(300.dp)
             .background(lightBlue)
     ) {
+        Box(
+            Modifier.fillMaxHeight()
+                .width(300.dp)
+                .clip(RoundedCornerShape(topStart = 20.dp , topEnd = 20.dp))
+        ) { }
         Column(
             horizontalAlignment = Alignment.Start ,
             verticalArrangement = Arrangement.Center ,
             modifier = Modifier
-                .clip(RoundedCornerShape(topStart = 20.dp , topEnd = 20.dp))
                 .padding(top = 300.dp)
                 .fillMaxHeight()
                 .width(300.dp)
@@ -65,7 +71,7 @@ fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
             MenuItemButton(
                 "Home" ,
                 Icons.Default.Home ,
-                Color.Cyan
+                darkBlue
             ) {
                 scope.launch {
                     drawerState.close()
@@ -100,7 +106,7 @@ fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
             MenuItemButton(
                 "History" ,
                 ImageVector.vectorResource(history_ic) ,
-                Color.Green
+                darkGreen
             ) {
                 scope.launch {
                     drawerState.close()
@@ -122,8 +128,8 @@ fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
         }
     }
 
-
 }
+
 
 @Composable
 fun MenuItemButton(

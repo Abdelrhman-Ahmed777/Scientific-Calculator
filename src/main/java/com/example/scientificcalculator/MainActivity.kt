@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.example.scientificcalculator.presention.navigation.MyApp
 import com.example.scientificcalculator.ui.theme.ScientificCalculatorTheme
+import java.security.Permission
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ScientificCalculatorTheme {
                 val navController = rememberNavController()
+
                 MyApp(navController)
             }
         }

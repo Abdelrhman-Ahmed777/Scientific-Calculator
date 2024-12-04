@@ -105,8 +105,6 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
 
-
-    implementation("com.google.accompanist:accompanist-permissions:0.31.2-alpha")
 }
 
 

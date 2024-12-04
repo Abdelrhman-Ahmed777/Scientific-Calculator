@@ -26,8 +26,12 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.scientificcalculator.R
 import com.example.scientificcalculator.ui.theme.Orange80
+import com.example.scientificcalculator.ui.theme.Purple80
+import com.example.scientificcalculator.ui.theme.PurpleGrey40
 import com.example.scientificcalculator.ui.theme.Red80
 import com.example.scientificcalculator.ui.theme.lightBlue
+import com.example.scientificcalculator.ui.theme.lightBlue2
+import com.example.scientificcalculator.ui.theme.lightPurple
 
 
 @Composable
@@ -142,15 +146,15 @@ fun NumberScreen(
                     .height(90.dp)
                     .width(90.dp)
                     .shadow(
-                        elevation = 32.dp , // Adjust elevation as needed
-                        shape = RectangleShape , // Match button shape
-                        ambientColor = Color.Black.copy(alpha = 5f) , // Adjust color and alpha
-                        spotColor = Color.Black.copy(alpha = 5f) // Adjust color and alpha
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
                     )
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue) ,
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
                 elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
@@ -165,10 +169,17 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .shadow(
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
+                    )
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
+                elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
                     text = "8" ,
@@ -183,10 +194,17 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .shadow(
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
+                    )
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
+                elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
                     text = "9" ,
@@ -229,10 +247,17 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .shadow(
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
+                    )
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
+                elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
                     text = "4" ,
@@ -246,10 +271,17 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .shadow(
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
+                    )
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
+                elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
                     text = "5" ,
@@ -263,10 +295,17 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .shadow(
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
+                    )
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
+                elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
                     text = "6" ,
@@ -308,10 +347,17 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .shadow(
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
+                    )
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
+                elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
                     text = "1" ,
@@ -325,10 +371,17 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .shadow(
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
+                    )
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
+                elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
                     text = "2" ,
@@ -342,10 +395,17 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .shadow(
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
+                    )
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
+                elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
                     text = "3" ,
@@ -387,10 +447,17 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .shadow(
+                        elevation = 32.dp ,
+                        shape = RectangleShape ,
+                        ambientColor = Color.Black.copy(alpha = 5f) ,
+                        spotColor = Color.Black.copy(alpha = 5f)
+                    )
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2) ,
+                elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
                     text = "00" ,
@@ -404,10 +471,10 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(70.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(15.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(lightBlue2)
             ) {
                 Text(
                     text = "0" ,
@@ -447,7 +514,7 @@ fun NumberScreen(
             ) {
                 Text(
                     text = "=" ,
-                    fontSize = 32.sp ,
+                    fontSize = 40.sp ,
                 )
             }
         }

@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.scientificcalculator.presention.ui.ai.MainAiChat
+import com.example.scientificcalculator.presention.ui.camera.CameraMainFun
 import com.example.scientificcalculator.presention.ui.home.MainCalculatorScreen
 
 @Composable
@@ -20,8 +21,10 @@ fun NestedNavgationGraph(navController: NavHostController) {
             MainCalculatorScreen(navController)
         }
         composable(route = Screens.AiAssistantScreen.route) {
-               MainAiChat(navController = navController)
-
+            MainAiChat(navController = navController)
+        }
+        composable(Screens.CameraScreen.route) {
+            CameraMainFun(navController )
         }
     }
 }
