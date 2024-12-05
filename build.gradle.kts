@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("com.google.devtools.ksp") version "2.0.10-1.0.24"
 }
 
 android {
@@ -28,6 +27,9 @@ android {
             )
         }
     }
+
+    
+
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -66,36 +68,35 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.material3)
-    //KSP
-    implementation(libs.androidx.room.runtime) // Replace with the latest version
-    //ksp("androidx.room:room-compiler:2.5.1")
+
 
 
     // Coroutines
-    implementation(libs.kotlinx.coroutines.android) // Replace with the latest version
-
+    implementation(libs.kotlinx.coroutines.android)
     // Lifecycle
     implementation(libs.androidx.lifecycle.runtime.ktx.v262) // Replace with the latest version
     implementation(libs.androidx.lifecycle.viewmodel.ktx) // Replace with the latest version
     implementation(libs.androidx.lifecycle.livedata.ktx) // Replace with the latest version
 
     // ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel.compose) // Replace with the latest version
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.exp4j) // Replace with the latest version
     implementation(libs.play.services.mlkit.text.recognition)
 
+/*    //KSP
+    implementation(libs.androidx.room.runtime)
     // for ksp
-    ksp(libs.my.annotation.processor) // Replace with your processor's coordinates
+    ksp("com.example:my-annotation-processor:1.0.0")
 
     ksp(libs.androidx.room.room.compiler)
 
     implementation(libs.androidx.room.runtime.v261)
 
     // To use Kotlin Symbol Processing (KSP) - If using KSP
-    ksp(libs.androidx.room.room.compiler)
+    ksp(libs.androidx.room.room.compiler)*/
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
@@ -108,5 +109,4 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-permissions:0.31.2-alpha")
 }
-
 

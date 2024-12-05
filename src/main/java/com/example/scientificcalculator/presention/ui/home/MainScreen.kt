@@ -1,8 +1,10 @@
 package com.example.scientificcalculator.presention.ui.home
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -23,8 +25,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,12 +44,15 @@ import androidx.navigation.compose.rememberNavController
 import com.example.scientificcalculator.ui.theme.Orange80
 import com.example.scientificcalculator.ui.theme.darkBlue
 import com.example.scientificcalculator.ui.theme.digital
-import com.example.scientificcalculator.ui.theme.lightBlue
+import com.example.scientificcalculator.ui.theme.white
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class , ExperimentalPermissionsApi::class)
 @Preview
 @Composable
 fun MainCalculatorScreen(navController: NavHostController = rememberNavController()) {
@@ -62,106 +65,126 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
     val scope = rememberCoroutineScope()
     val problem = remember { mutableStateOf("") }
     var result by remember { mutableStateOf("") }
+    val cameraPermissionState =
+        rememberPermissionState(android.Manifest.permission.CAMERA)
+
     ModalNavigationDrawer(
         drawerState = drawerState ,
         drawerContent = {
-            MenuContent(drawerState , navController)
+            MenuContent(
+                drawerState ,
+                navController ,
+                cameraPermissionState.status.isGranted ,
+                onResultRequestPermission = {
+                    scope.launch(Dispatchers.IO) {
+                        cameraPermissionState.launchPermissionRequest()
+                    }
+                })
         }
     ) {
         Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text("Main Screen" , fontSize = 32.sp , color = Color.White) } ,
-                    navigationIcon = {
-                        Icon(
-                            Icons.Default.Menu ,
-                            contentDescription = "Menu" ,
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .clickable { scope.launch { drawerState.open() } } ,
-                            tint = Color.White
-                        )
-                    } ,
-                    colors = TopAppBarDefaults.topAppBarColors(containerColor = lightBlue)
-                )
-            }
         ) { padding ->
-            ConstraintLayout(
+            Box(
                 Modifier
                     .fillMaxSize()
-                    .padding(padding)
+                    .background(white)
             ) {
-                val (resultRef , keyboard) = createRefs()
-
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally ,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp)
-                        .constrainAs(resultRef) {
-                            top.linkTo(parent.top)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                        }
+                ConstraintLayout(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(padding)
                 ) {
-                    Text(
-                        problem.value ,
-                        fontSize = 42.sp ,
-                        fontFamily = digital ,
-                        color = darkBlue ,
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .weight(1f)
-                            .padding(16.dp)
-                            .verticalScroll(rememberScrollState())
-                            .align(Alignment.Start)
-                    )
-                    Spacer(Modifier.height(16.dp))
-                    Text(
-                        text = result ,
-                        fontFamily = digital ,
-                        fontSize = 64.sp ,
-                        color = Orange80 ,
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .horizontalScroll(rememberScrollState())
-                            .align(Alignment.End)
-                            .wrapContentSize()
-                    )
-                }
+                    val (iconm , resultRef , keyboard) = createRefs()
 
-                HorizontalPager(
-                    state = pagerState ,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.6f)
-                        .padding(top = 64.dp)
-                        .constrainAs(keyboard) {
-                            bottom.linkTo(parent.bottom, margin = 32.dp)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                        }
-                ) { page ->
-                    when (page) {
-                        0 -> NumberScreen(
-                            text = problem ,
-                            onResult = {
+                    Icon(
+                        Icons.Default.Menu ,
+                        contentDescription = "Menu" ,
+                        modifier = Modifier
+                            .constrainAs(iconm) {
+                                start.linkTo(parent.start , margin = 24.dp)
+                                top.linkTo(parent.top , margin = 24.dp)
+                            }
+                            .padding(16.dp)
+                            .clickable {
                                 scope.launch(Dispatchers.IO) {
-                                    try {
-                                        result = calculateExpression(problem.value).toString()
-                                    } catch (e: Exception) {
-                                        Log.i("ok" , "the error is $e")
+                                    drawerState.open()
+                                }
+                            } ,
+                        tint = Color.Black
+                    )
+
+
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally ,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp)
+                            .constrainAs(resultRef) {
+                                top.linkTo(parent.top)
+                                start.linkTo(parent.start)
+                                end.linkTo(parent.end)
+                            }
+                    ) {
+                        Text(
+                            problem.value ,
+                            fontSize = 42.sp ,
+                            fontFamily = digital ,
+                            color = darkBlue ,
+                            modifier = Modifier
+                                .wrapContentSize()
+                                .weight(1f)
+                                .padding(16.dp)
+                                .verticalScroll(rememberScrollState())
+                                .align(Alignment.Start)
+                        )
+                        Spacer(Modifier.height(16.dp))
+                        Text(
+                            text = result ,
+                            fontFamily = digital ,
+                            fontSize = 64.sp ,
+                            color = Orange80 ,
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .horizontalScroll(rememberScrollState())
+                                .align(Alignment.End)
+                                .wrapContentSize()
+                        )
+                    }
+
+                    HorizontalPager(
+                        state = pagerState ,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(0.6f)
+                            .padding(top = 64.dp)
+                            .constrainAs(keyboard) {
+                                bottom.linkTo(parent.bottom , margin = 32.dp)
+                                start.linkTo(parent.start)
+                                end.linkTo(parent.end)
+                            }
+                    ) { page ->
+                        when (page) {
+                            0 -> NumberScreen(
+                                text = problem ,
+                                onResult = {
+                                    scope.launch(Dispatchers.IO) {
+                                        try {
+                                            result = calculateExpression(problem.value).toString()
+                                        } catch (e: Exception) {
+                                            Log.i("ok" , "the error is $e")
+                                        }
+
                                     }
 
                                 }
+                            )
 
-                            }
-                        )
-
-                        1 -> SinesScreen()
+                            1 -> SinesScreen()
+                        }
                     }
                 }
             }
+
         }
     }
 }

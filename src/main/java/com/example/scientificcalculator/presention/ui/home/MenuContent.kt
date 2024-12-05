@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -28,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -40,10 +40,18 @@ import com.example.scientificcalculator.ui.theme.darkGreen
 import com.example.scientificcalculator.ui.theme.lightBlue
 import com.example.scientificcalculator.ui.theme.midPurple
 import com.example.scientificcalculator.ui.theme.white
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionState
+import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
+fun MenuContent(
+    drawerState: DrawerState , navController: NavHostController , haspermission: Boolean ,
+    onResultRequestPermission: () -> Unit
+) {
+
     val scope = rememberCoroutineScope()
 
     Box(
@@ -53,7 +61,8 @@ fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
             .background(lightBlue)
     ) {
         Box(
-            Modifier.fillMaxHeight()
+            Modifier
+                .fillMaxHeight()
                 .width(300.dp)
                 .clip(RoundedCornerShape(topStart = 20.dp , topEnd = 20.dp))
         ) { }
@@ -87,6 +96,7 @@ fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
                 scope.launch {
                     drawerState.close()
                     navController.navigate(Screens.AiAssistantScreen.route)
+
                 }
             }
             Spacer(Modifier.height(16.dp))
@@ -97,8 +107,11 @@ fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
                 midPurple
             ) {
                 scope.launch {
+                    if (!haspermission) {
+                        onResultRequestPermission()
+                    }
                     drawerState.close()
-
+                    navController.navigate(Screens.CameraScreen.route)
                 }
             }
             Spacer(Modifier.height(16.dp))
@@ -113,18 +126,7 @@ fun MenuContent(drawerState: DrawerState , navController: NavHostController) {
 
                 }
             }
-            Spacer(Modifier.height(16.dp))
 
-            MenuItemButton(
-                "Settings" ,
-                Icons.Default.Settings ,
-                Color.Gray
-            ) {
-                scope.launch {
-                    drawerState.close()
-
-                }
-            }
         }
     }
 
@@ -152,9 +154,9 @@ fun MenuItemButton(
             imageVector = icon ,
             contentDescription = text ,
             tint = tint ,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(34.dp)
         )
         Spacer(Modifier.width(32.dp))
-        Text(text , color = lightBlue , fontSize = 20.sp)
+        Text(text , color = lightBlue , fontSize = 24.sp , fontWeight = FontWeight.Bold)
     }
 }

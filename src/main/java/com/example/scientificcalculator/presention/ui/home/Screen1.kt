@@ -15,10 +15,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
@@ -26,12 +30,9 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.scientificcalculator.R
 import com.example.scientificcalculator.ui.theme.Orange80
-import com.example.scientificcalculator.ui.theme.Purple80
-import com.example.scientificcalculator.ui.theme.PurpleGrey40
 import com.example.scientificcalculator.ui.theme.Red80
 import com.example.scientificcalculator.ui.theme.lightBlue
 import com.example.scientificcalculator.ui.theme.lightBlue2
-import com.example.scientificcalculator.ui.theme.lightPurple
 
 
 @Composable
@@ -79,7 +80,14 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(70.dp)
                     .width(70.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(8.dp))
+                    .alpha(0.3f)
+                    .graphicsLayer {
+                        renderEffect = BlurEffect(
+                            10f , 10f ,
+                            TileMode.Decal
+                        )
+                    } ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
                 colors = ButtonDefaults.buttonColors(lightBlue)
