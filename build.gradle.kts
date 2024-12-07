@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -48,6 +49,8 @@ android {
 }
 
 dependencies {
+    val roomVersion = "2.6.1"
+
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
     implementation(libs.androidx.core.ktx)
@@ -86,27 +89,19 @@ dependencies {
     implementation(libs.exp4j) // Replace with the latest version
     implementation(libs.play.services.mlkit.text.recognition)
 
-/*    //KSP
-    implementation(libs.androidx.room.runtime)
-    // for ksp
-    ksp("com.example:my-annotation-processor:1.0.0")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
 
-    ksp(libs.androidx.room.room.compiler)
-
-    implementation(libs.androidx.room.runtime.v261)
-
-    // To use Kotlin Symbol Processing (KSP) - If using KSP
-    ksp(libs.androidx.room.room.compiler)*/
-
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation(libs.androidx.room.ktx)
 
     // for camera x
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
 
-
+  //  implementation("org.mariuszgromada.math:mathparser.org-mXparser:5.0.7")
     implementation("com.google.accompanist:accompanist-permissions:0.31.2-alpha")
+    //implementation("com.github.derysudrajat:math-view:1.0.1")
+
 }
 

@@ -1,5 +1,6 @@
 package com.example.scientificcalculator.presention.ui.home
 
+import android.Manifest
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerDefaults
+import androidx.compose.foundation.pager.PagerSnapDistance
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -27,13 +30,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,9 +48,13 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.scientificcalculator.ui.theme.Orange80
+import com.example.scientificcalculator.ui.theme.black
 import com.example.scientificcalculator.ui.theme.darkBlue
 import com.example.scientificcalculator.ui.theme.digital
+import com.example.scientificcalculator.ui.theme.lightBlue
 import com.example.scientificcalculator.ui.theme.white
+import com.example.scientificcalculator.ui.theme.whiteBlu22
+import com.example.scientificcalculator.ui.theme.whiteBlue
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -56,6 +66,8 @@ import net.objecthunter.exp4j.ExpressionBuilder
 @Preview
 @Composable
 fun MainCalculatorScreen(navController: NavHostController = rememberNavController()) {
+
+
     val pagerState = rememberPagerState(
         initialPage = 0 ,
         pageCount = { 2 } ,
@@ -65,8 +77,17 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
     val scope = rememberCoroutineScope()
     val problem = remember { mutableStateOf("") }
     var result by remember { mutableStateOf("") }
+    var index = remember { mutableIntStateOf(pagerState.currentPage) }
     val cameraPermissionState =
-        rememberPermissionState(android.Manifest.permission.CAMERA)
+        rememberPermissionState(Manifest.permission.CAMERA)
+
+    LaunchedEffect(pagerState.currentPage , pagerState.isScrollInProgress) {
+        if (!pagerState.isScrollInProgress) {
+            pagerState.currentPage.also { index.intValue = it }
+        }
+    }
+
+
 
     ModalNavigationDrawer(
         drawerState = drawerState ,
@@ -87,20 +108,33 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
             Box(
                 Modifier
                     .fillMaxSize()
-                    .background(white)
+                    .background(black)
             ) {
                 ConstraintLayout(
                     Modifier
                         .fillMaxSize()
                         .padding(padding)
                 ) {
-                    val (iconm , resultRef , keyboard) = createRefs()
+                    val (title , icon,indexRef , resultRef , keyboard) = createRefs()
+
+
+                    Text(
+                        "Scientific Calculator" ,
+                        color = Color.White ,
+                        fontFamily = digital,
+                        fontSize = 30.sp ,
+                        modifier = Modifier
+                            .constrainAs(title) {
+                                top.linkTo(parent.top , margin = 32.dp)
+                                start.linkTo(icon.end , margin = 24.dp)
+                            })
+
 
                     Icon(
                         Icons.Default.Menu ,
                         contentDescription = "Menu" ,
                         modifier = Modifier
-                            .constrainAs(iconm) {
+                            .constrainAs(icon) {
                                 start.linkTo(parent.start , margin = 24.dp)
                                 top.linkTo(parent.top , margin = 24.dp)
                             }
@@ -110,7 +144,7 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                                     drawerState.open()
                                 }
                             } ,
-                        tint = Color.Black
+                        tint = Color.White
                     )
 
 
@@ -118,9 +152,9 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                         horizontalAlignment = Alignment.CenterHorizontally ,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(300.dp)
+                            .height(200.dp)
                             .constrainAs(resultRef) {
-                                top.linkTo(parent.top)
+                                top.linkTo(title.bottom , margin = 8.dp)
                                 start.linkTo(parent.start)
                                 end.linkTo(parent.end)
                             }
@@ -129,7 +163,7 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                             problem.value ,
                             fontSize = 42.sp ,
                             fontFamily = digital ,
-                            color = darkBlue ,
+                            color = white ,
                             modifier = Modifier
                                 .wrapContentSize()
                                 .weight(1f)
@@ -137,7 +171,7 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                                 .verticalScroll(rememberScrollState())
                                 .align(Alignment.Start)
                         )
-                        Spacer(Modifier.height(16.dp))
+                        Spacer(Modifier.height(8.dp))
                         Text(
                             text = result ,
                             fontFamily = digital ,
@@ -153,9 +187,13 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
 
                     HorizontalPager(
                         state = pagerState ,
+                        flingBehavior = PagerDefaults.flingBehavior(
+                            state = pagerState ,
+                            pagerSnapDistance = PagerSnapDistance.atMost(2)
+                        ),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .fillMaxHeight(0.6f)
+                            .fillMaxHeight(0.7f)
                             .padding(top = 64.dp)
                             .constrainAs(keyboard) {
                                 bottom.linkTo(parent.bottom , margin = 32.dp)
@@ -179,9 +217,24 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                                 }
                             )
 
-                            1 -> SinesScreen()
+                            1 -> SambolesScreen(
+                                problem
+                            )
                         }
                     }
+                    DotIndicator(
+                        totalDots = 2 ,
+                        selectedIndex = index.intValue ,
+                        selectedColor = lightBlue ,
+                        unselectedColor = Color.Gray ,
+                        dotSize = 8.dp ,
+                        dotSpacing = 40.dp ,
+                        modifier = Modifier
+                            .constrainAs(indexRef) {
+                                start.linkTo(parent.start)
+                                end.linkTo(parent.end)
+                                bottom.linkTo(parent.bottom , margin = 32.dp)
+                            })
                 }
             }
 

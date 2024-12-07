@@ -18,11 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.TileMode
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
@@ -31,6 +28,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.scientificcalculator.R
 import com.example.scientificcalculator.ui.theme.Orange80
 import com.example.scientificcalculator.ui.theme.Red80
+import com.example.scientificcalculator.ui.theme.darkBlue
 import com.example.scientificcalculator.ui.theme.lightBlue
 import com.example.scientificcalculator.ui.theme.lightBlue2
 
@@ -41,7 +39,92 @@ fun NumberScreen(
     onResult: (String) -> Unit
 ) {
     ConstraintLayout(Modifier.fillMaxSize()) {
-        val (row1 , row2 , row3 , row4 , row5) = createRefs()
+        val (row0 , row1 , row2 , row3 , row4 , row5) = createRefs()
+
+        Row(
+            horizontalArrangement = Arrangement.Center ,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .constrainAs(row0) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+        ) {
+
+            Button(
+                onClick = {
+                    text.value +=  "("
+
+                } ,
+                modifier = Modifier
+                    .height(56.dp)
+                    .width(80.dp)
+                    .clip(RoundedCornerShape(20.dp)) ,
+                contentPadding = ButtonDefaults.ContentPadding ,
+                shape = RectangleShape ,
+                colors = ButtonDefaults.buttonColors(lightBlue)
+            ) {
+                Text(
+                    text = "(" ,
+                    fontSize = 20.sp ,
+                )
+            }
+            Spacer(modifier = Modifier.width(32.dp))
+
+            Button(
+                onClick = { text.value += ")" } ,
+                modifier = Modifier
+                    .height(56.dp)
+                    .width(80.dp)
+                    .clip(RoundedCornerShape(20.dp)) ,
+                contentPadding = ButtonDefaults.ContentPadding ,
+                shape = RectangleShape ,
+                colors = ButtonDefaults.buttonColors(lightBlue)
+            ) {
+                Text(
+                    text = ")" ,
+                    fontSize = 20.sp ,
+                )
+            }
+            Spacer(modifier = Modifier.width(32.dp))
+
+
+            Button(
+                onClick = { text.value += "nCr" } ,
+                modifier = Modifier
+                    .height(56.dp)
+                    .width(80.dp)
+                    .clip(RoundedCornerShape(20.dp)) ,
+                contentPadding = ButtonDefaults.ContentPadding ,
+                shape = RectangleShape ,
+                colors = ButtonDefaults.buttonColors(lightBlue)
+            ) {
+                Text(
+                    text = "nCr" ,
+                    fontSize = 20.sp ,
+                )
+            }
+            Spacer(modifier = Modifier.width(32.dp))
+            Button(
+                onClick = { text.value += "∪" } ,
+                modifier = Modifier
+                    .height(56.dp)
+                    .width(80.dp)
+                    .clip(RoundedCornerShape(20.dp)) ,
+                contentPadding = ButtonDefaults.ContentPadding ,
+                shape = RectangleShape ,
+                colors = ButtonDefaults.buttonColors(lightBlue)
+            ) {
+                Text(
+                    text = "∪" ,
+                    fontSize = 32.sp ,
+                )
+            }
+
+
+        }
 
         Row(
             horizontalArrangement = Arrangement.Center ,
@@ -49,7 +132,7 @@ fun NumberScreen(
                 .fillMaxWidth()
                 .height(70.dp)
                 .constrainAs(row1) {
-                    top.linkTo(parent.top)
+                    top.linkTo(row0.bottom , margin = 16.dp)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
@@ -63,15 +146,16 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(70.dp)
                     .width(132.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
                 colors = ButtonDefaults.buttonColors(Red80)
             ) {
                 Text(
-                    text = "C" ,
+                    text = "AC" ,
                     fontSize = 20.sp ,
-                )
+
+                    )
             }
             Spacer(modifier = Modifier.width(24.dp))
 
@@ -80,21 +164,15 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(70.dp)
                     .width(70.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .alpha(0.3f)
-                    .graphicsLayer {
-                        renderEffect = BlurEffect(
-                            10f , 10f ,
-                            TileMode.Decal
-                        )
-                    } ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(darkBlue)
             ) {
                 Text(
                     text = "%" ,
                     fontSize = 20.sp ,
+                    modifier = Modifier.alpha(1f)
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
@@ -105,10 +183,10 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(70.dp)
                     .width(70.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(darkBlue)
             ) {
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.delete_ic) ,
@@ -118,14 +196,14 @@ fun NumberScreen(
             }
             Spacer(modifier = Modifier.width(24.dp))
             Button(
-                onClick = { text.value += "\u00F7" } ,
+                onClick = { text.value += "/" } ,
                 modifier = Modifier
                     .height(70.dp)
                     .width(70.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(darkBlue)
             ) {
                 Text(
                     text = "\u00F7" ,
@@ -221,14 +299,14 @@ fun NumberScreen(
             }
             Spacer(modifier = Modifier.width(24.dp))
             Button(
-                onClick = { text.value += "X" } ,
+                onClick = { text.value += "*" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(70.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(darkBlue)
             ) {
                 Text(
                     text = "X" ,
@@ -326,10 +404,10 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(70.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(darkBlue)
             ) {
                 Text(
                     text = "+" ,
@@ -426,10 +504,10 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(70.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(darkBlue)
             ) {
                 Text(
                     text = "-" ,
@@ -479,7 +557,7 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(70.dp)
-                    .clip(RoundedCornerShape(15.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
                 colors = ButtonDefaults.buttonColors(lightBlue2)
@@ -497,10 +575,10 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(60.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(lightBlue)
+                colors = ButtonDefaults.buttonColors(darkBlue)
             ) {
                 Text(
                     text = "." ,
@@ -515,7 +593,7 @@ fun NumberScreen(
                 modifier = Modifier
                     .height(90.dp)
                     .width(124.dp)
-                    .clip(RoundedCornerShape(8.dp)) ,
+                    .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
                 colors = ButtonDefaults.buttonColors(Orange80)
@@ -528,5 +606,4 @@ fun NumberScreen(
         }
     }
 }
-
 

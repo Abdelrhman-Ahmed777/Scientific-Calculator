@@ -36,8 +36,10 @@ import com.example.scientificcalculator.R.drawable.history_ic
 import com.example.scientificcalculator.R.drawable.robot_2_ic
 import com.example.scientificcalculator.presention.navigation.Screens
 import com.example.scientificcalculator.ui.theme.darkBlue
+import com.example.scientificcalculator.ui.theme.darkBlue2
 import com.example.scientificcalculator.ui.theme.darkGreen
 import com.example.scientificcalculator.ui.theme.lightBlue
+import com.example.scientificcalculator.ui.theme.lightGray
 import com.example.scientificcalculator.ui.theme.midPurple
 import com.example.scientificcalculator.ui.theme.white
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -58,7 +60,7 @@ fun MenuContent(
         modifier = Modifier
             .fillMaxHeight()
             .width(300.dp)
-            .background(lightBlue)
+            .background(darkBlue2)
     ) {
         Box(
             Modifier
@@ -68,19 +70,20 @@ fun MenuContent(
         ) { }
         Column(
             horizontalAlignment = Alignment.Start ,
-            verticalArrangement = Arrangement.Center ,
+            verticalArrangement = Arrangement.Top ,
             modifier = Modifier
                 .padding(top = 300.dp)
                 .fillMaxHeight()
                 .width(300.dp)
-                .background(white)
+                .background(darkBlue)
         ) {
 
+            Spacer(Modifier.height(16.dp))
 
             MenuItemButton(
                 "Home" ,
                 Icons.Default.Home ,
-                darkBlue
+                lightGray
             ) {
                 scope.launch {
                     drawerState.close()

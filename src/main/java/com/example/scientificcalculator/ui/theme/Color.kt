@@ -15,6 +15,11 @@ val darkPurple = Color(0xFF350750)
 val midPurple = Color(0xFF571081)
 val lightPurple = Color(0xFF7616AF)
 val darkGreen = Color(0xFF02FA97)
+val briatBlue = Color(0xFF1991ff)
+val whiteBlue = Color(0xFFADD8FF)
+val whiteBlue2 = Color(0xFFB2DAFF)
+val whiteBlu22 = Color(0xFF9CC1E7)
+val lightGray = Color(0xFFC4C7C9)
 
 
 
