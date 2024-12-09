@@ -36,8 +36,11 @@ import com.example.scientificcalculator.ui.theme.lightBlue2
 @Composable
 fun NumberScreen(
     text: MutableState<String> ,
-    onResult: (String) -> Unit
+    onResult: (String) -> Unit ,
+    onClear: () -> Unit ,
 ) {
+
+
     ConstraintLayout(Modifier.fillMaxSize()) {
         val (row0 , row1 , row2 , row3 , row4 , row5) = createRefs()
 
@@ -55,7 +58,7 @@ fun NumberScreen(
 
             Button(
                 onClick = {
-                    text.value +=  "("
+                    text.value += "("
 
                 } ,
                 modifier = Modifier
@@ -140,8 +143,7 @@ fun NumberScreen(
 
             Button(
                 onClick = {
-                    text.value = ""
-
+                    onClear()
                 } ,
                 modifier = Modifier
                     .height(70.dp)

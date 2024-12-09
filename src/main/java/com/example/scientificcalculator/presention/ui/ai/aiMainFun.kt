@@ -36,6 +36,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.scientificcalculator.R.drawable.send_ic
 import com.example.scientificcalculator.presention.viewModel.AiViewModel
+import com.example.scientificcalculator.ui.theme.black
 import com.example.scientificcalculator.ui.theme.darkBlue2
 import com.example.scientificcalculator.ui.theme.digital
 import com.example.scientificcalculator.ui.theme.lightBlue
@@ -54,7 +55,7 @@ fun MainAiChat(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(darkBlue2)
+            .background(black)
     ) {
         ConstraintLayout(
             modifier = Modifier
@@ -113,7 +114,7 @@ fun MainAiChat(navController: NavController) {
                     message.value = ""
                 } ,
                 modifier = Modifier.constrainAs(chatBox) {
-                    bottom.linkTo(parent.bottom , margin = 32.dp)
+                    bottom.linkTo(parent.bottom , margin = 64.dp)
                     start.linkTo(parent.start , margin = 16.dp)
                 }
             )

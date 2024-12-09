@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
+    id("com.chaquo.python")
+
 }
 
 android {
@@ -11,12 +13,19 @@ android {
 
     defaultConfig {
         applicationId = "com.example.scientificcalculator"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+        ndk {
+            // On Apple silicon, you can omit x86_64.
+            abiFilters += listOf("arm64-v8a", "x86_64")
+        }
+
     }
 
     buildTypes {
@@ -29,7 +38,7 @@ android {
         }
     }
 
-    
+
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -46,8 +55,20 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"  // Add this line with the appropriate version
     }
-}
 
+    flavorDimensions += "pyVersion"
+    productFlavors {
+        create("py310") { dimension = "pyVersion" }
+        create("py311") { dimension = "pyVersion" }
+    }
+
+}
+chaquopy {
+    productFlavors {
+        getByName("py310") { version = "3.10" }
+        getByName("py311") { version = "3.11" }
+    }
+}
 dependencies {
     val roomVersion = "2.6.1"
 
@@ -102,6 +123,7 @@ dependencies {
   //  implementation("org.mariuszgromada.math:mathparser.org-mXparser:5.0.7")
     implementation("com.google.accompanist:accompanist-permissions:0.31.2-alpha")
     //implementation("com.github.derysudrajat:math-view:1.0.1")
+        //   implementation("com.chaquo.python:chaquopy:13.0.0") // Use the latest version
 
 }
 

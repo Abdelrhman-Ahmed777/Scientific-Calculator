@@ -1,12 +1,13 @@
-package com.example.scientificcalculator.model.db
+package com.example.scientificcalculator.domain
 
-import com.example.scientificcalculator.domain.Item
+import com.example.scientificcalculator.model.db.DataBase
+import kotlinx.coroutines.flow.Flow
 
 class Repository(private val db: DataBase) {
     suspend fun insert(item: Item) {
         db.dao().insert(item)
     }
-    suspend fun getAll(): List<Item> {
+     fun getAll(): Flow<List<Item>> {
         return db.dao().getAll()
     }
 }

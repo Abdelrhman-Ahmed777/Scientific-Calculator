@@ -39,22 +39,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import com.example.scientificcalculator.domain.Item
+import com.example.scientificcalculator.domain.Repository
+import com.example.scientificcalculator.presention.viewModel.DataBaseViewModel
 import com.example.scientificcalculator.ui.theme.Orange80
 import com.example.scientificcalculator.ui.theme.black
-import com.example.scientificcalculator.ui.theme.darkBlue
 import com.example.scientificcalculator.ui.theme.digital
 import com.example.scientificcalculator.ui.theme.lightBlue
 import com.example.scientificcalculator.ui.theme.white
-import com.example.scientificcalculator.ui.theme.whiteBlu22
-import com.example.scientificcalculator.ui.theme.whiteBlue
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -63,9 +60,13 @@ import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
 
 @OptIn(ExperimentalMaterial3Api::class , ExperimentalPermissionsApi::class)
-@Preview
 @Composable
-fun MainCalculatorScreen(navController: NavHostController = rememberNavController()) {
+fun MainCalculatorScreen(
+    navController: NavHostController ,
+    repository: Repository ,
+) {
+
+    val viewModel = DataBaseViewModel(repository)
 
 
     val pagerState = rememberPagerState(
@@ -115,13 +116,13 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                         .fillMaxSize()
                         .padding(padding)
                 ) {
-                    val (title , icon,indexRef , resultRef , keyboard) = createRefs()
+                    val (title , icon , indexRef , resultRef , keyboard) = createRefs()
 
 
                     Text(
                         "Scientific Calculator" ,
                         color = Color.White ,
-                        fontFamily = digital,
+                        fontFamily = digital ,
                         fontSize = 30.sp ,
                         modifier = Modifier
                             .constrainAs(title) {
@@ -190,7 +191,7 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                         flingBehavior = PagerDefaults.flingBehavior(
                             state = pagerState ,
                             pagerSnapDistance = PagerSnapDistance.atMost(2)
-                        ),
+                        ) ,
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight(0.7f)
@@ -204,10 +205,20 @@ fun MainCalculatorScreen(navController: NavHostController = rememberNavControlle
                         when (page) {
                             0 -> NumberScreen(
                                 text = problem ,
+                                onClear = {
+                                    problem.value = ""
+                                    result = ""
+                                } ,
                                 onResult = {
-                                    scope.launch(Dispatchers.IO) {
+                                    scope.launch {
                                         try {
                                             result = calculateExpression(problem.value).toString()
+                                            val item = Item(
+                                                problem = problem.value ,
+                                                answer = result
+                                            )
+                                            viewModel.insertItem(item)
+
                                         } catch (e: Exception) {
                                             Log.i("ok" , "the error is $e")
                                         }

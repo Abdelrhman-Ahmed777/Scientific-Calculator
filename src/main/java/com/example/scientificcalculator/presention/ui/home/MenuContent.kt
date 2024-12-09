@@ -126,6 +126,7 @@ fun MenuContent(
             ) {
                 scope.launch {
                     drawerState.close()
+                    navController.navigate(Screens.HistoryScreen.route)
 
                 }
             }
