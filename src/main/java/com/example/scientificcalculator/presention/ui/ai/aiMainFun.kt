@@ -27,6 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -38,13 +39,27 @@ import com.example.scientificcalculator.R.drawable.send_ic
 import com.example.scientificcalculator.presention.viewModel.AiViewModel
 import com.example.scientificcalculator.ui.theme.black
 import com.example.scientificcalculator.ui.theme.darkBlue2
+import com.example.scientificcalculator.ui.theme.darkPurple
 import com.example.scientificcalculator.ui.theme.digital
 import com.example.scientificcalculator.ui.theme.lightBlue
+import com.example.scientificcalculator.ui.theme.lightPurple
+import com.example.scientificcalculator.ui.theme.midPurple
 import com.example.scientificcalculator.ui.theme.white
 
 @Composable
 @RequiresApi(Build.VERSION_CODES.O)
 fun MainAiChat(navController: NavController) {
+    val backgroud = Brush.verticalGradient(listOf(
+        black,
+        black,
+        black,
+        darkPurple ,
+        lightPurple ,
+        lightPurple,
+        lightPurple,
+        lightPurple,
+
+    ))
 
     val message = remember { mutableStateOf("") }
     val aiViewModel = AiViewModel()
@@ -55,7 +70,7 @@ fun MainAiChat(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(black)
+            .background(backgroud)
     ) {
         ConstraintLayout(
             modifier = Modifier
@@ -130,7 +145,7 @@ fun MainAiChat(navController: NavController) {
                     .width(80.dp)
                     .clip(RoundedCornerShape(15.dp))
                     .constrainAs(sendButton) {
-                        bottom.linkTo(parent.bottom , margin = 32.dp)
+                        bottom.linkTo(parent.bottom , margin = 64.dp)
                         start.linkTo(chatBox.end , margin = 16.dp)
                     } ,
                 shape = RectangleShape ,

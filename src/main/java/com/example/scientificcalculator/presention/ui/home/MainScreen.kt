@@ -39,6 +39,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,8 +50,11 @@ import com.example.scientificcalculator.domain.Repository
 import com.example.scientificcalculator.presention.viewModel.DataBaseViewModel
 import com.example.scientificcalculator.ui.theme.Orange80
 import com.example.scientificcalculator.ui.theme.black
+import com.example.scientificcalculator.ui.theme.darkPurple
 import com.example.scientificcalculator.ui.theme.digital
 import com.example.scientificcalculator.ui.theme.lightBlue
+import com.example.scientificcalculator.ui.theme.lightPurple
+import com.example.scientificcalculator.ui.theme.midPurple
 import com.example.scientificcalculator.ui.theme.white
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
@@ -58,6 +62,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
+import kotlin.math.sqrt
 
 @OptIn(ExperimentalMaterial3Api::class , ExperimentalPermissionsApi::class)
 @Composable
@@ -65,6 +70,20 @@ fun MainCalculatorScreen(
     navController: NavHostController ,
     repository: Repository ,
 ) {
+
+
+    val backgroud = Brush.verticalGradient(
+        listOf(
+            black ,
+            black ,
+            darkPurple ,
+            darkPurple ,
+            midPurple ,
+            lightPurple ,
+            lightPurple
+        )
+    )
+
 
     val viewModel = DataBaseViewModel(repository)
 
@@ -109,7 +128,7 @@ fun MainCalculatorScreen(
             Box(
                 Modifier
                     .fillMaxSize()
-                    .background(black)
+                    .background(backgroud)
             ) {
                 ConstraintLayout(
                     Modifier
@@ -163,7 +182,6 @@ fun MainCalculatorScreen(
                         Text(
                             problem.value ,
                             fontSize = 42.sp ,
-                            fontFamily = digital ,
                             color = white ,
                             modifier = Modifier
                                 .wrapContentSize()
@@ -175,7 +193,6 @@ fun MainCalculatorScreen(
                         Spacer(Modifier.height(8.dp))
                         Text(
                             text = result ,
-                            fontFamily = digital ,
                             fontSize = 64.sp ,
                             color = Orange80 ,
                             modifier = Modifier
@@ -212,7 +229,11 @@ fun MainCalculatorScreen(
                                 onResult = {
                                     scope.launch {
                                         try {
-                                            result = calculateExpression(problem.value).toString()
+                                            val e = 2.718281828459045
+                                            val refinedExpression = refineExpression(problem.value)
+                                            result = calculateExpression(refinedExpression
+                                                .replace("e", e.toString())
+                                            ).toString()
                                             val item = Item(
                                                 problem = problem.value ,
                                                 answer = result
@@ -259,3 +280,11 @@ fun calculateExpression(expression: String): Double {
     return exp.evaluate()
 }
 
+fun factorial(n: Int): Int = if (n == 0 || n == 1) 1 else n * factorial(n - 1)
+
+fun refineExpression(expression: String): String {
+    val factorialRegex = Regex("""(\d+)!""")
+    return factorialRegex.replace(expression) { matchResult ->
+        val number = matchResult.groupValues[1].toInt()
+        factorial(number).toString()
+    }}

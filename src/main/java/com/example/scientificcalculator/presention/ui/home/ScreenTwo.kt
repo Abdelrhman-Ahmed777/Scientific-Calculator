@@ -1,7 +1,6 @@
 package com.example.scientificcalculator.presention.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +14,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -29,11 +27,8 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.scientificcalculator.R
 import com.example.scientificcalculator.ui.theme.Orange80
-import com.example.scientificcalculator.ui.theme.Red80
 import com.example.scientificcalculator.ui.theme.darkBlue
-import com.example.scientificcalculator.ui.theme.lightBlue
 import com.example.scientificcalculator.ui.theme.lightBlue2
-import kotlin.math.sqrt
 
 @Composable
 fun SambolesScreen(
@@ -57,7 +52,7 @@ fun SambolesScreen(
 
             Button(
                 onClick = {
-                    text.value +=  "π"
+                    text.value += "π"
 
                 } ,
                 modifier = Modifier
@@ -76,7 +71,7 @@ fun SambolesScreen(
             Spacer(modifier = Modifier.width(24.dp))
 
             Button(
-                onClick = { text.value += "nPr" } ,
+                onClick = { text.value += "npr" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
@@ -112,7 +107,9 @@ fun SambolesScreen(
             }
             Spacer(modifier = Modifier.width(24.dp))
             Button(
-                onClick = { text.value += "!" } ,
+                onClick = {
+                    text.value += "!"
+                } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(70.dp)
@@ -122,8 +119,8 @@ fun SambolesScreen(
                 colors = ButtonDefaults.buttonColors(darkBlue)
             ) {
                 Text(
-                    text = "!" ,
-                    fontSize = 32.sp ,
+                    text = "x!" ,
+                    fontSize = 24.sp ,
                 )
             }
 
@@ -167,7 +164,7 @@ fun SambolesScreen(
             Spacer(modifier = Modifier.width(24.dp))
 
             Button(
-                onClick = { text.value += "Cos" } ,
+                onClick = { text.value += "cos" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
@@ -192,7 +189,7 @@ fun SambolesScreen(
 
 
             Button(
-                onClick = { text.value += "Tan" } ,
+                onClick = { text.value += "tan" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
@@ -245,7 +242,7 @@ fun SambolesScreen(
         ) {
 
             Button(
-                onClick = { text.value += "4" } ,
+                onClick = { text.value += "^2" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
@@ -262,14 +259,14 @@ fun SambolesScreen(
                 elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
-                    text = "4" ,
+                    text = "x²" ,
                     fontSize = 32.sp ,
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
 
             Button(
-                onClick = { text.value += "5" } ,
+                onClick = { text.value += "^3" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
@@ -286,14 +283,14 @@ fun SambolesScreen(
                 elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
-                    text = "5" ,
+                    text = "x³" ,
                     fontSize = 32.sp ,
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
 
             Button(
-                onClick = { text.value += "6" } ,
+                onClick = { text.value += "e" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
@@ -310,7 +307,7 @@ fun SambolesScreen(
                 elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
-                    text = "6" ,
+                    text = "e" ,
                     fontSize = 32.sp ,
                 )
             }
@@ -345,7 +342,7 @@ fun SambolesScreen(
         ) {
 
             Button(
-                onClick = { text.value += "1" } ,
+                onClick = { text.value += "log" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
@@ -362,14 +359,14 @@ fun SambolesScreen(
                 elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
-                    text = "1" ,
-                    fontSize = 32.sp ,
+                    text = "Log" ,
+                    fontSize = 24.sp ,
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
 
             Button(
-                onClick = { text.value += "2" } ,
+                onClick = { text.value += "exp" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
@@ -386,14 +383,14 @@ fun SambolesScreen(
                 elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
-                    text = "2" ,
-                    fontSize = 32.sp ,
+                    text = "EXP" ,
+                    fontSize = 20.sp ,
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
 
             Button(
-                onClick = { text.value += "3" } ,
+                onClick = { text.value += "inv" } ,
                 modifier = Modifier
                     .height(90.dp)
                     .width(90.dp)
@@ -410,8 +407,8 @@ fun SambolesScreen(
                 elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
-                    text = "3" ,
-                    fontSize = 32.sp ,
+                    text = "INV" ,
+                    fontSize = 24.sp ,
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
@@ -445,10 +442,10 @@ fun SambolesScreen(
         ) {
 
             Button(
-                onClick = { text.value += "00" } ,
+                onClick = { text.value += "^-10" } ,
                 modifier = Modifier
                     .height(90.dp)
-                    .width(90.dp)
+                    .width(124.dp)
                     .shadow(
                         elevation = 32.dp ,
                         shape = RectangleShape ,
@@ -462,43 +459,25 @@ fun SambolesScreen(
                 elevation = ButtonDefaults.buttonElevation(32.dp)
             ) {
                 Text(
-                    text = "00" ,
+                    text = "1^-10",
                     fontSize = 20.sp ,
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
 
             Button(
-                onClick = { text.value += "0" } ,
+                onClick = { text.value += "^10" } ,
                 modifier = Modifier
                     .height(90.dp)
-                    .width(70.dp)
+                    .width(124.dp)
                     .clip(RoundedCornerShape(20.dp)) ,
                 contentPadding = ButtonDefaults.ContentPadding ,
                 shape = RectangleShape ,
                 colors = ButtonDefaults.buttonColors(lightBlue2)
             ) {
                 Text(
-                    text = "0" ,
+                    text = "1^10" ,
                     fontSize = 20.sp ,
-                )
-            }
-            Spacer(modifier = Modifier.width(24.dp))
-
-
-            Button(
-                onClick = { text.value += "." } ,
-                modifier = Modifier
-                    .height(90.dp)
-                    .width(60.dp)
-                    .clip(RoundedCornerShape(20.dp)) ,
-                contentPadding = ButtonDefaults.ContentPadding ,
-                shape = RectangleShape ,
-                colors = ButtonDefaults.buttonColors(darkBlue)
-            ) {
-                Text(
-                    text = "." ,
-                    fontSize = 32.sp ,
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
@@ -522,3 +501,4 @@ fun SambolesScreen(
         }
     }
 }
+

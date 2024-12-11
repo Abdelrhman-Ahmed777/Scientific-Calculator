@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -23,11 +24,23 @@ import androidx.navigation.NavController
 import com.example.scientificcalculator.domain.Repository
 import com.example.scientificcalculator.presention.viewModel.DataBaseViewModel
 import com.example.scientificcalculator.ui.theme.black
+import com.example.scientificcalculator.ui.theme.darkPurple
 import com.example.scientificcalculator.ui.theme.digital
+import com.example.scientificcalculator.ui.theme.lightPurple
+import com.example.scientificcalculator.ui.theme.midPurple
 import com.example.scientificcalculator.ui.theme.white
 
 @Composable
 fun HistoryScreen(navController: NavController , repository: Repository) {
+    val backgroud = Brush.verticalGradient(listOf(
+        black,
+        black,
+        darkPurple ,
+        darkPurple ,
+        midPurple ,
+        lightPurple ,
+        lightPurple
+    ))
 
     val viewModel = DataBaseViewModel(repository)
     val allItems by viewModel.getAllItems().collectAsState(emptyList())
@@ -35,7 +48,7 @@ fun HistoryScreen(navController: NavController , repository: Repository) {
     ConstraintLayout(
         Modifier
             .fillMaxSize()
-            .background(black)
+            .background(backgroud)
     ) {
         val (title , back , history) = createRefs()
 
